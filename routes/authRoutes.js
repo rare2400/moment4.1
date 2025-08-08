@@ -112,12 +112,12 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({ error: "Incorrect username or password" });
         } else {
             //generate JWT token
-            const payload = { username: user.username };
+            const payload = { username: user.username, id: user._id };
             const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-            user = await User.findOne({ user: username }, { password: 0 });
             const response = {
                 message: "user logged in",
+                userId: user._id,
                 user: username,
                 token: token
             }
