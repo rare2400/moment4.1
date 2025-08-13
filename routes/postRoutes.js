@@ -20,7 +20,7 @@ router.post("/", authenticateToken, async (req, res) => {
         const post = await Post.create({
             title,
             content,
-            sign: sign
+            sign
         });
         res.status(201).json(post);
     } catch (error) {
